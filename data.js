@@ -60,6 +60,8 @@ function initializeTemplateData() {
                 name: "Hero",
                 role: "Protagonist",
                 age: "25",
+                power_level: "A-Rank",
+                power_source: "LO1",
                 appearance: "Tall with dark hair",
                 personality: "Brave and determined",
                 motivations: "Seeking revenge for family",
