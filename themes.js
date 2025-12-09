@@ -94,7 +94,7 @@ const fontPresets = {
 
 // Apply theme to document
 function applyTheme(themeName) {
-    const theme = themes[themeName] || themes.fantasy;
+    const theme = themes[themeName] || themes.default;
     const root = document.documentElement;
     
     root.style.setProperty('--accent', theme.accent);
@@ -106,8 +106,13 @@ function applyTheme(themeName) {
     root.style.setProperty('--text-dim', theme.textDim);
     root.style.setProperty('--border', theme.border);
     
-    data.meta.theme = themeName;
-    saveToLocalStorage();
+    // Save theme to data if data object exists
+    if (typeof data !== 'undefined') {
+        data.meta.theme = themeName;
+        if (typeof saveToLocalStorage === 'function') {
+            saveToLocalStorage();
+        }
+    }
     
     // Update active theme in picker
     updateThemePickerUI();
@@ -126,7 +131,7 @@ function renderThemePicker() {
         option.textContent = theme.name;
         option.onclick = () => applyTheme(key);
         
-        // Add color preview
+        // Add color preview with left border
         option.style.borderLeftWidth = "4px";
         option.style.borderLeftColor = theme.accent;
         
@@ -139,7 +144,7 @@ function renderThemePicker() {
 // Update theme picker active state
 function updateThemePickerUI() {
     const options = document.querySelectorAll(".theme-option");
-    const currentTheme = data.meta.theme || "fantasy";
+    const currentTheme = (typeof data !== 'undefined' && data.meta.theme) || "default";
     
     options.forEach((option, index) => {
         const themeKey = Object.keys(themes)[index];
@@ -156,11 +161,11 @@ function applyFontPreset(presetName) {
     const customGroup = document.getElementById("customFontGroup");
     
     if (presetName === "custom") {
-        customGroup.style.display = "block";
+        if (customGroup) customGroup.style.display = "block";
         return;
     }
     
-    customGroup.style.display = "none";
+    if (customGroup) customGroup.style.display = "none";
     
     if (!presetName) {
         document.body.style.fontFamily = "";
@@ -175,36 +180,46 @@ function applyFontPreset(presetName) {
 
 // Apply custom font from textarea
 function applyCustomFont() {
-    const input = document.getElementById("customFont").value.trim();
+    const input = document.getElementById("customFont");
     if (!input) return;
     
+    const value = input.value.trim();
+    if (!value) return;
+    
     // Check if it's a URL
-    if (input.startsWith("http")) {
+    if (value.startsWith("http")) {
         const fontFamily = "CustomFont";
-        const style = document.getElementById("customFontStyle") || document.createElement("style");
-        style.id = "customFontStyle";
-        style.textContent = `
-            @font-face {
-                font-family: '${fontFamily}';
-                src: url('${input}');
-            }
-        `;
-        if (!document.getElementById("customFontStyle")) {
-            document.head.appendChild(style);
-        }
-        document.body.style.fontFamily = `'${fontFamily}', sans-serif`;
-    } 
-    // Check if it's @font-face CSS
-    else if (input.includes("@font-face")) {
-        const style = document.getElementById("customFontStyle") || document.createElement("style");
-        style.id = "customFontStyle";
-        style.textContent = input;
-        if (!document.getElementById("customFontStyle")) {
+        let style = document.getElementById("customFontStyle");
+        
+        if (!style) {
+            style = document.createElement("style");
+            style.id = "customFontStyle";
             document.head.appendChild(style);
         }
         
+        style.textContent = `
+            @font-face {
+                font-family: '${fontFamily}';
+                src: url('${value}');
+            }
+        `;
+        
+        document.body.style.fontFamily = `'${fontFamily}', sans-serif`;
+    } 
+    // Check if it's @font-face CSS
+    else if (value.includes("@font-face")) {
+        let style = document.getElementById("customFontStyle");
+        
+        if (!style) {
+            style = document.createElement("style");
+            style.id = "customFontStyle";
+            document.head.appendChild(style);
+        }
+        
+        style.textContent = value;
+        
         // Try to extract font-family name
-        const match = input.match(/font-family:\s*['"]?([^'";}]+)['"]?/i);
+        const match = value.match(/font-family:\s*['"]?([^'";}]+)['"]?/i);
         if (match) {
             document.body.style.fontFamily = `'${match[1]}', sans-serif`;
         }
@@ -214,5 +229,51 @@ function applyCustomFont() {
 // Set text direction
 function setTextDirection(direction) {
     document.body.setAttribute("dir", direction);
-    saveToLocalStorage();
+    
+    // Save to data if available
+    if (typeof data !== 'undefined') {
+        data.meta.textDirection = direction;
+        if (typeof saveToLocalStorage === 'function') {
+            saveToLocalStorage();
+        }
+    }
+}
+
+// Update meta information
+function updateMeta(key, value) {
+    if (typeof data !== 'undefined') {
+        data.meta[key] = value;
+        if (typeof saveToLocalStorage === 'function') {
+            saveToLocalStorage();
+        }
+    }
+}
+
+// Initialize themes on page load
+if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', function() {
+        // Render theme picker if it exists
+        renderThemePicker();
+        
+        // Apply saved theme if available
+        if (typeof data !== 'undefined' && data.meta && data.meta.theme) {
+            applyTheme(data.meta.theme);
+        }
+        
+        // Apply saved text direction if available
+        if (typeof data !== 'undefined' && data.meta && data.meta.textDirection) {
+            setTextDirection(data.meta.textDirection);
+        }
+        
+        // Initialize settings modal inputs if they exist
+        const projectTitle = document.getElementById("projectTitle");
+        const projectLanguage = document.getElementById("projectLanguage");
+        const textDirection = document.getElementById("textDirection");
+        
+        if (typeof data !== 'undefined' && data.meta) {
+            if (projectTitle) projectTitle.value = data.meta.title || "";
+            if (projectLanguage) projectLanguage.value = data.meta.language || "";
+            if (textDirection) textDirection.value = data.meta.textDirection || "ltr";
+        }
+    });
 }
