@@ -8,6 +8,8 @@ const schemas = {
             name: { type: "text", label: "Name", required: true },
             role: { type: "text", label: "Role" },
             age: { type: "text", label: "Age" },
+            power_level: { type: "text", label: "⚡ Power Level (e.g., S-Rank, Level 50, Master)" },
+            power_source: { type: "links", label: "🔮 Power Source/System (Lore IDs)", targets: ["lore"] },
             appearance: { type: "textarea", label: "Appearance" },
             personality: { type: "textarea", label: "Personality" },
             motivations: { type: "textarea", label: "Motivations" },
