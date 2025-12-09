@@ -24,17 +24,29 @@ const themes = {
         textDim: "#a8a29e",
         border: "#292524"
     },
-    cyberpunk: {
-        name: "Cyberpunk",
-        accent: "#f0abfc",
-        accentDark: "#d946ef",
-        accentLight: "#fae8ff",
-        bg: "#0a0118",
-        card: "#1a0b2e",
-        cardHover: "#2d1b4e",
-        text: "#fdf4ff",
-        textDim: "#e9d5ff",
-        border: "#4c1d95"
+    xianxia: {
+        name: "Xianxia",
+        accent: "#f59e0b",
+        accentDark: "#d97706",
+        accentLight: "#fbbf24",
+        bg: "#160b01",
+        card: "#2a1b0a",
+        cardHover: "#3d2a14",
+        text: "#fef3c7",
+        textDim: "#e5c180",
+        border: "#57442e"
+    },
+    cosmicHorror: {
+        name: "Cosmic Horror",
+        accent: "#8b5cf6",
+        accentDark: "#7c3aed",
+        accentLight: "#a78bfa",
+        bg: "#050510",
+        card: "#0d0d1e",
+        cardHover: "#1a1a3e",
+        text: "#e0e0ff",
+        textDim: "#a5a5d4",
+        border: "#2d2d5a"
     },
     horror: {
         name: "Horror",
@@ -48,6 +60,18 @@ const themes = {
         textDim: "#a3a3a3",
         border: "#262626"
     },
+    thriller: {
+        name: "Thriller",
+        accent: "#ef4444",
+        accentDark: "#dc2626",
+        accentLight: "#f87171",
+        bg: "#100a0a",
+        card: "#1a1414",
+        cardHover: "#292121",
+        text: "#fef2f2",
+        textDim: "#fca5a5",
+        border: "#3a2e2e"
+    },
     mystery: {
         name: "Mystery",
         accent: "#6366f1",
@@ -59,6 +83,90 @@ const themes = {
         text: "#f5f3ff",
         textDim: "#c4b5fd",
         border: "#3d3a4f"
+    },
+    romance: {
+        name: "Romance",
+        accent: "#fb7185",
+        accentDark: "#f43f5e",
+        accentLight: "#fda4af",
+        bg: "#1a0f1e",
+        card: "#2d1b33",
+        cardHover: "#3d2644",
+        text: "#fdf2f8",
+        textDim: "#fbbf24",
+        border: "#4a2d55"
+    },
+    litrpg: {
+        name: "LitRPG",
+        accent: "#84cc16",
+        accentDark: "#65a30d",
+        accentLight: "#a3e635",
+        bg: "#0a1409",
+        card: "#132711",
+        cardHover: "#1f3d1a",
+        text: "#f0fdf4",
+        textDim: "#bbf7d0",
+        border: "#2d5a27"
+    },
+    historicalFiction: {
+        name: "Historical Fiction",
+        accent: "#d97706",
+        accentDark: "#b45309",
+        accentLight: "#f59e0b",
+        bg: "#1c1917",
+        card: "#292524",
+        cardHover: "#44403c",
+        text: "#fef3c7",
+        textDim: "#d6d3d1",
+        border: "#44403c"
+    },
+    adventure: {
+        name: "Adventure",
+        accent: "#f97316",
+        accentDark: "#ea580c",
+        accentLight: "#fb923c",
+        bg: "#1c1410",
+        card: "#2d231c",
+        cardHover: "#44342a",
+        text: "#fff7ed",
+        textDim: "#fed7aa",
+        border: "#57442e"
+    },
+    western: {
+        name: "Western",
+        accent: "#92400e",
+        accentDark: "#78350f",
+        accentLight: "#b45309",
+        bg: "#1a1410",
+        card: "#2c2419",
+        cardHover: "#3f3325",
+        text: "#fef3c7",
+        textDim: "#d4c5a0",
+        border: "#57472e"
+    },
+    noir: {
+        name: "Noir",
+        accent: "#f5f5f5",
+        accentDark: "#d4d4d4",
+        accentLight: "#ffffff",
+        bg: "#0a0a0a",
+        card: "#1a1a1a",
+        cardHover: "#2a2a2a",
+        text: "#f5f5f5",
+        textDim: "#a3a3a3",
+        border: "#404040"
+    },
+    cyberpunk: {
+        name: "Cyberpunk",
+        accent: "#f0abfc",
+        accentDark: "#d946ef",
+        accentLight: "#fae8ff",
+        bg: "#0a0118",
+        card: "#1a0b2e",
+        cardHover: "#2d1b4e",
+        text: "#fdf4ff",
+        textDim: "#e9d5ff",
+        border: "#4c1d95"
     },
     steampunk: {
         name: "Steampunk",
@@ -72,35 +180,35 @@ const themes = {
         textDim: "#d6d3d1",
         border: "#44403c"
     },
-    apocalypse: {
-        name: "Apocalypse",
-        accent: "#84cc16",
-        accentDark: "#65a30d",
-        accentLight: "#a3e635",
-        bg: "#1a1410",
-        card: "#2c2419",
-        cardHover: "#3f3325",
-        text: "#fef3c7",
-        textDim: "#d4c5a0",
-        border: "#57472e"
+    dystopian: {
+        name: "Dystopian",
+        accent: "#6b7280",
+        accentDark: "#4b5563",
+        accentLight: "#9ca3af",
+        bg: "#111111",
+        card: "#1f1f1f",
+        cardHover: "#2d2d2d",
+        text: "#e5e7eb",
+        textDim: "#9ca3af",
+        border: "#374151"
     },
-    ocean: {
-        name: "Ocean Deep",
-        accent: "#0ea5e9",
-        accentDark: "#0284c7",
-        accentLight: "#38bdf8",
-        bg: "#020617",
-        card: "#0c1e2e",
-        cardHover: "#1e3a5f",
-        text: "#e0f2fe",
-        textDim: "#7dd3fc",
-        border: "#1e3a5f"
+    satire: {
+        name: "Satire",
+        accent: "#ec4899",
+        accentDark: "#db2777",
+        accentLight: "#f472b6",
+        bg: "#1a0f1e",
+        card: "#2a1a2f",
+        cardHover: "#3d2a44",
+        text: "#fdf2f8",
+        textDim: "#f9a8d4",
+        border: "#4a2d55"
     },
-    vampire: {
-        name: "Vampire",
-        accent: "#a21caf",
-        accentDark: "#86198f",
-        accentLight: "#c026d3",
+    magicalRealism: {
+        name: "Magical Realism",
+        accent: "#c026d3",
+        accentDark: "#a21caf",
+        accentLight: "#e879f9",
         bg: "#18001a",
         card: "#2d0a2e",
         cardHover: "#4a154b",
@@ -108,77 +216,17 @@ const themes = {
         textDim: "#e9d5ff",
         border: "#4a154b"
     },
-    desert: {
-        name: "Desert Sun",
-        accent: "#f97316",
-        accentDark: "#ea580c",
-        accentLight: "#fb923c",
-        bg: "#1c1410",
-        card: "#2d231c",
-        cardHover: "#44342a",
-        text: "#fff7ed",
-        textDim: "#fed7aa",
-        border: "#57442e"
-    },
-    forest: {
-        name: "Forest",
-        accent: "#22c55e",
-        accentDark: "#16a34a",
-        accentLight: "#4ade80",
-        bg: "#0a1409",
-        card: "#132711",
-        cardHover: "#1f3d1a",
-        text: "#f0fdf4",
-        textDim: "#bbf7d0",
-        border: "#2d5a27"
-    },
-    arctic: {
-        name: "Arctic",
-        accent: "#38bdf8",
-        accentDark: "#0ea5e9",
-        accentLight: "#7dd3fc",
-        bg: "#0f1419",
-        card: "#1a2733",
-        cardHover: "#2d3f52",
-        text: "#f0f9ff",
-        textDim: "#bae6fd",
-        border: "#334e68"
-    },
-    noir: {
-        name: "Film Noir",
-        accent: "#f5f5f5",
-        accentDark: "#d4d4d4",
-        accentLight: "#ffffff",
-        bg: "#0a0a0a",
-        card: "#1a1a1a",
-        cardHover: "#2a2a2a",
-        text: "#f5f5f5",
-        textDim: "#a3a3a3",
-        border: "#404040"
-    },
-    sunset: {
-        name: "Sunset",
-        accent: "#fb7185",
-        accentDark: "#f43f5e",
-        accentLight: "#fda4af",
-        bg: "#1a0f1e",
-        card: "#2d1b33",
-        cardHover: "#3d2644",
-        text: "#fdf2f8",
-        textDim: "#fbbf24",
-        border: "#4a2d55"
-    },
-    space: {
-        name: "Deep Space",
-        accent: "#8b5cf6",
-        accentDark: "#7c3aed",
-        accentLight: "#a78bfa",
-        bg: "#050510",
-        card: "#0d0d1e",
-        cardHover: "#1a1a3e",
-        text: "#f5f3ff",
-        textDim: "#c4b5fd",
-        border: "#2d2d5a"
+    wuxia: {
+        name: "Wuxia",
+        accent: "#dc2626",
+        accentDark: "#b91c1c",
+        accentLight: "#ef4444",
+        bg: "#1a0000",
+        card: "#2a0a0a",
+        cardHover: "#3d1414",
+        text: "#fee",
+        textDim: "#fca5a5",
+        border: "#5a2a2a"
     }
 };
 
