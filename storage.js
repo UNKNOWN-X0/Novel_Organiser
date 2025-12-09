@@ -12,9 +12,7 @@ function loadFromLocalStorage() {
         const saved = localStorage.getItem("worldBuilderData");
         if (saved) {
             const parsed = JSON.parse(saved);
-            // Merge to ensure new fields exist
             data = { ...data, ...parsed };
-            // Ensure meta exists
             if (!data.meta) {
                 data.meta = { title: "My World", language: "en", theme: "fantasy" };
             }
@@ -57,7 +55,7 @@ async function loadFromLink() {
         if (match) {
             fetchUrl = `https://drive.google.com/uc?export=download&id=${match[1]}`;
         } else {
-            errorEl.innerHTML = '<div class="error-message">Invalid Google Drive link format. Expected: https://drive.google.com/file/d/FILE_ID/view</div>';
+            errorEl.innerHTML = '<div class="error-message">Invalid Google Drive link format</div>';
             return;
         }
     }
@@ -79,16 +77,14 @@ async function loadFromLink() {
         
         // Check if response is HTML (Drive interstitial page)
         if (text.trim().startsWith("<!DOCTYPE") || text.trim().startsWith("<html")) {
-            errorEl.innerHTML = '<div class="error-message">⚠️ Received HTML instead of JSON.<br><br><strong>For Google Drive:</strong><br>• Ensure file is publicly accessible (Anyone with link can view)<br>• Use the share link format<br><br><strong>For GitHub:</strong><br>• Ensure file is in a public repository<br>• Private repos require authentication and won\'t work via direct fetch<br><br><strong>Alternative:</strong> Copy the JSON content and paste it in the textarea below.</div>';
+            errorEl.innerHTML = '<div class="error-message">⚠️ Received HTML instead of JSON. Make sure file is publicly accessible.</div>';
             return;
         }
         
-        // Try to parse JSON
         const parsed = JSON.parse(text);
         
-        // Validate structure
         if (!validateJSONStructure(parsed)) {
-            errorEl.innerHTML = '<div class="error-message">Invalid JSON structure. Expected format with characters, locations, etc.</div>';
+            errorEl.innerHTML = '<div class="error-message">Invalid JSON structure</div>';
             return;
         }
         
@@ -102,25 +98,7 @@ async function loadFromLink() {
         showToast("✓ Data loaded successfully!", "success");
         
     } catch (error) {
-        let errorMessage = `<div class="error-message"><strong>Failed to load data:</strong><br>${escapeHtml(error.message)}<br><br>`;
-        
-        if (error.message.includes("CORS") || error.message.includes("NetworkError")) {
-            errorMessage += `<strong>CORS Error Detected:</strong><br>
-            • For GitHub: Ensure you're using the raw.githubusercontent.com URL<br>
-            • For Google Drive: Try copying JSON content and pasting below<br>
-            • For local files: Use the paste JSON option below</div>`;
-        } else if (error.message.includes("JSON")) {
-            errorMessage += `<strong>JSON Parse Error:</strong><br>
-            • Check that the file contains valid JSON<br>
-            • Google Drive might be returning an HTML page - check file permissions</div>`;
-        } else {
-            errorMessage += `<strong>Troubleshooting:</strong><br>
-            • Verify the URL is correct<br>
-            • Check file permissions (must be public)<br>
-            • Try pasting JSON content directly below</div>`;
-        }
-        
-        errorEl.innerHTML = errorMessage;
+        errorEl.innerHTML = `<div class="error-message">Failed to load: ${escapeHtml(error.message)}</div>`;
     }
 }
 
@@ -138,7 +116,7 @@ function loadFromJSON() {
         const parsed = JSON.parse(jsonText);
         
         if (!validateJSONStructure(parsed)) {
-            errorEl.innerHTML = '<div class="error-message">Invalid JSON structure. Expected format with characters, locations, factions, etc.</div>';
+            errorEl.innerHTML = '<div class="error-message">Invalid JSON structure</div>';
             return;
         }
         
@@ -157,10 +135,8 @@ function loadFromJSON() {
 }
 
 function validateJSONStructure(obj) {
-    // Check if basic structure exists
     const requiredKeys = ["characters", "locations", "factions", "items"];
     const hasRequiredKeys = requiredKeys.some(key => obj.hasOwnProperty(key));
-    
     return hasRequiredKeys && typeof obj === "object";
 }
 
@@ -190,7 +166,6 @@ function copyJSON() {
         navigator.clipboard.writeText(jsonString).then(() => {
             showToast("✓ JSON copied to clipboard!", "success");
         }).catch(err => {
-            // Fallback for older browsers
             const textarea = document.createElement("textarea");
             textarea.value = jsonString;
             document.body.appendChild(textarea);
