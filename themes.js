@@ -1,7 +1,7 @@
 // Theme definitions with expanded variety
 const themes = {
     fantasy: {
-        name: "🌲 Fantasy",
+        name: "Fantasy",
         accent: "#10b981",
         accentDark: "#059669",
         accentLight: "#34d399",
@@ -13,7 +13,7 @@ const themes = {
         border: "#334155"
     },
     scifi: {
-        name: "🚀 Sci-Fi",
+        name: "Sci-Fi",
         accent: "#06b6d4",
         accentDark: "#0891b2",
         accentLight: "#22d3ee",
@@ -25,7 +25,7 @@ const themes = {
         border: "#292524"
     },
     cyberpunk: {
-        name: "🌃 Cyberpunk",
+        name: "Cyberpunk",
         accent: "#f0abfc",
         accentDark: "#d946ef",
         accentLight: "#fae8ff",
@@ -37,7 +37,7 @@ const themes = {
         border: "#4c1d95"
     },
     horror: {
-        name: "🩸 Horror",
+        name: "Horror",
         accent: "#dc2626",
         accentDark: "#991b1b",
         accentLight: "#ef4444",
@@ -49,7 +49,7 @@ const themes = {
         border: "#262626"
     },
     mystery: {
-        name: "🔮 Mystery",
+        name: "Mystery",
         accent: "#6366f1",
         accentDark: "#4f46e5",
         accentLight: "#818cf8",
@@ -61,7 +61,7 @@ const themes = {
         border: "#3d3a4f"
     },
     steampunk: {
-        name: "⚙️ Steampunk",
+        name: "Steampunk",
         accent: "#d97706",
         accentDark: "#b45309",
         accentLight: "#f59e0b",
@@ -73,7 +73,7 @@ const themes = {
         border: "#44403c"
     },
     apocalypse: {
-        name: "☢️ Apocalypse",
+        name: "Apocalypse",
         accent: "#84cc16",
         accentDark: "#65a30d",
         accentLight: "#a3e635",
@@ -85,7 +85,7 @@ const themes = {
         border: "#57472e"
     },
     ocean: {
-        name: "🌊 Ocean Deep",
+        name: "Ocean Deep",
         accent: "#0ea5e9",
         accentDark: "#0284c7",
         accentLight: "#38bdf8",
@@ -97,7 +97,7 @@ const themes = {
         border: "#1e3a5f"
     },
     vampire: {
-        name: "🧛 Vampire",
+        name: "Vampire",
         accent: "#a21caf",
         accentDark: "#86198f",
         accentLight: "#c026d3",
@@ -109,7 +109,7 @@ const themes = {
         border: "#4a154b"
     },
     desert: {
-        name: "🏜️ Desert Sun",
+        name: "Desert Sun",
         accent: "#f97316",
         accentDark: "#ea580c",
         accentLight: "#fb923c",
@@ -121,7 +121,7 @@ const themes = {
         border: "#57442e"
     },
     forest: {
-        name: "🌿 Forest",
+        name: "Forest",
         accent: "#22c55e",
         accentDark: "#16a34a",
         accentLight: "#4ade80",
@@ -133,7 +133,7 @@ const themes = {
         border: "#2d5a27"
     },
     arctic: {
-        name: "❄️ Arctic",
+        name: "Arctic",
         accent: "#38bdf8",
         accentDark: "#0ea5e9",
         accentLight: "#7dd3fc",
@@ -145,7 +145,7 @@ const themes = {
         border: "#334e68"
     },
     noir: {
-        name: "🎬 Film Noir",
+        name: "Film Noir",
         accent: "#f5f5f5",
         accentDark: "#d4d4d4",
         accentLight: "#ffffff",
@@ -157,7 +157,7 @@ const themes = {
         border: "#404040"
     },
     sunset: {
-        name: "🌅 Sunset",
+        name: "Sunset",
         accent: "#fb7185",
         accentDark: "#f43f5e",
         accentLight: "#fda4af",
@@ -169,7 +169,7 @@ const themes = {
         border: "#4a2d55"
     },
     space: {
-        name: "🌌 Deep Space",
+        name: "Deep Space",
         accent: "#8b5cf6",
         accentDark: "#7c3aed",
         accentLight: "#a78bfa",
