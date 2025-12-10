@@ -29,9 +29,11 @@ function resetData() {
     if (confirm("Are you sure you want to reset all data? This cannot be undone.")) {
         localStorage.removeItem("worldBuilderData");
         initializeTemplateData();
-        renderTabs();
+        renderSidebarNav();
         renderContent();
         updateMetaFields();
+        updateBreadcrumb();
+        populateThemeSelect();
         showToast("Data reset to template", "success");
     }
 }
@@ -91,9 +93,11 @@ async function loadFromLink() {
         data = parsed;
         saveToLocalStorage();
         closeModal('loadModal');
-        renderTabs();
+        renderSidebarNav();
         renderContent();
         updateMetaFields();
+        updateBreadcrumb();
+        populateThemeSelect();
         applyTheme(data.meta.theme || "fantasy");
         showToast("✓ Data loaded successfully!", "success");
         
@@ -123,9 +127,11 @@ function loadFromJSON() {
         data = parsed;
         saveToLocalStorage();
         closeModal('loadModal');
-        renderTabs();
+        renderSidebarNav();
         renderContent();
         updateMetaFields();
+        updateBreadcrumb();
+        populateThemeSelect();
         applyTheme(data.meta.theme || "fantasy");
         showToast("✓ Data loaded successfully!", "success");
         
