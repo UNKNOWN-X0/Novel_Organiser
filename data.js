@@ -112,8 +112,6 @@ function initializeTemplateData() {
                 id: "L1",
                 name: "Capital City",
                 type: "Urban",
-                power_level: "A-Rank",
-                power_source: "LO1",
                 description: "The heart of the kingdom",
                 culture_politics: "Democratic governance, diverse population",
                 important_people: "C1",
@@ -126,7 +124,7 @@ function initializeTemplateData() {
                 id: "F1",
                 name: "The Order",
                 type: "Military Organization",
-                power_level: "A-Rank",
+                faction_level: "Major Power",
                 power_source: "LO1",
                 description: "Elite warriors protecting the realm",
                 leaders: "C1",
@@ -141,7 +139,7 @@ function initializeTemplateData() {
                 id: "I1",
                 name: "Ancient Sword",
                 type: "Weapon",
-                power_level: "A-Rank",
+                item_level: "Legendary",
                 power_source: "LO1",
                 appearance: "Ornate blade with runes",
                 powers_properties: "Enhances wielder's strength",
@@ -173,6 +171,7 @@ function initializeTemplateData() {
         ],
         meta: {
             title: "My World",
+            author: "",
             language: "en",
             theme: "fantasy"
         }
