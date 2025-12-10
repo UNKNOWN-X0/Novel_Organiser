@@ -153,43 +153,17 @@ const schemas = {
         label: "World Rules",
         icon: `<svg xmlns="http://www.w3.org/2000/svg"
                   width="24" height="24" viewBox="0 0 24 24"
-                  fill="none" stroke="currentColor" stroke-width="0.6"
+                  fill="none" stroke="currentColor" stroke-width="2"
                   stroke-linecap="round" stroke-linejoin="round"
                   aria-hidden="true">
-                  <!-- concentric “rings” -->
-                  <path d="M2 8
-                           Q12 4 22 8
-                           Q12 12 2 8Z" />
-                  <path d="M3 11
-                           Q12 7 21 11
-                           Q12 14.5 3 11Z" />
-                  <path d="M4 13.5
-                           Q12 10 20 13.5
-                           Q12 16 4 13.5Z" />
-                  <path d="M5 15.5
-                           Q12 13 19 15.5
-                           Q12 17.5 5 15.5Z" />
-                  <path d="M6 17
-                           Q12 15.5 18 17
-                           Q12 18.5 6 17Z" />
-                  <!-- radial grid lines curving into the “hole” -->
-                  <path d="M12 3
-                           Q11 9 12 12
-                           Q13 15 12 21" />
-                  <path d="M8 4
-                           Q9 8.5 10.5 11.5
-                           Q12 14.5 11 20" />
-                  <path d="M16 4
-                           Q15 8.5 13.5 11.5
-                           Q12 14.5 13 20" />
-                  <path d="M5 6
-                           Q8 9 10 11
-                           Q11.5 13 10 18" />
-                  <path d="M19 6
-                           Q16 9 14 11
-                           Q12.5 13 14 18" />
-                </svg>
-                `,
+                  <!-- hole -->
+                  <ellipse cx="12" cy="16" rx="6" ry="3" />
+                  <!-- horizontal grid -->
+                  <path d="M4 12c2 1 4 1.5 8 1.5s6-.5 8-1.5" />
+                  <!-- vertical grid -->
+                  <path d="M8 6c1.5 2 2.5 4 2.5 8" />
+                  <path d="M16 6c-1.5 2-2.5 4-2.5 8" />
+                </svg>`,
         fields: {
             id: { type: "text", label: "ID", required: true },
             name: { type: "text", label: "Name", required: true },
