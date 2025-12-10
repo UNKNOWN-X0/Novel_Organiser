@@ -72,8 +72,8 @@ function updateField(type, index, field, value) {
         }
     }
     
-    // Update tab counts and card title
-    renderTabs();
+    // Update sidebar nav, card title
+    renderSidebarNav();
     const card = document.querySelector(`#card-${type}-${data[type][index].id}`);
     if (card) {
         const displayName = data[type][index].name || data[type][index].topic || data[type][index].id;
@@ -91,14 +91,14 @@ function toggleCollapse(type, index) {
 }
 
 function navigateToComponent(id) {
-    // Find which type contains this ID
     for (const [type, items] of Object.entries(data)) {
         if (type === "meta") continue;
         const found = items.find(item => item.id === id);
         if (found) {
             currentTab = type;
-            renderTabs();
+            renderSidebarNav();
             renderContent();
+            updateBreadcrumb();
             setTimeout(() => {
                 const card = document.getElementById(`card-${type}-${id}`);
                 if (card) {
@@ -121,25 +121,65 @@ function createComponentCard(type, item, index) {
     const schema = schemas[type];
     const displayName = item.name || item.topic || item.id;
     
+    const isEditing = card.dataset?.editing === "true";
+    
     card.innerHTML = `
-        <div class="component-header" onclick="toggleCollapse('${type}', ${index})">
-            <div class="component-title">${schema.icon} ${displayName} <span style="color: var(--text-dim); font-size: 14px;">(${item.id})</span></div>
-            <div class="component-controls" onclick="event.stopPropagation()">
+        <div class="component-header">
+            <div class="component-title">${schema.icon} ${displayName} <span style="color: var(--text-dim); font-size: 14px; font-weight: 400;">(${item.id})</span></div>
+            <div class="component-controls">
+                <button class="btn-edit" onclick="toggleEditMode('${type}', ${index}, event)" data-editing="false">
+                    ✏️ Edit
+                </button>
                 <button class="secondary" onclick="duplicateComponent('${type}', ${index})">📋 Duplicate</button>
                 <button class="danger" onclick="deleteComponent('${type}', ${index})">🗑️ Delete</button>
             </div>
         </div>
-        <div class="component-body" id="body-${type}-${index}">
-            ${renderFields(type, item, index)}
+        <div class="component-body view-mode" id="body-${type}-${index}">
+            ${renderFieldsView(type, item, index)}
+        </div>
+        <div class="component-body edit-mode" id="body-edit-${type}-${index}" style="display: none;">
+            ${renderFieldsEdit(type, item, index)}
+            <div class="edit-actions">
+                <button class="btn primary" onclick="saveEdit('${type}', ${index})">💾 Save Changes</button>
+                <button class="btn secondary" onclick="cancelEdit('${type}', ${index})">✖️ Cancel</button>
+            </div>
         </div>
     `;
     
     return card;
 }
 
-function renderFields(type, item, index) {
+function renderFieldsView(type, item, index) {
     const schema = schemas[type];
-    let html = "";
+    let html = '<div class="field-grid">';
+    
+    for (const [fieldKey, fieldDef] of Object.entries(schema.fields)) {
+        const value = item[fieldKey] || "";
+        if (fieldKey === 'id') continue; // Skip ID in view mode
+        
+        if (value) {
+            html += `<div class="field-display">`;
+            html += `<div class="field-label">${fieldDef.label}</div>`;
+            
+            if (fieldDef.type === "links" || fieldDef.type === "link") {
+                html += `<div class="field-value">${renderLinksPreview(value, fieldDef.targets)}</div>`;
+            } else if (fieldDef.type === "textarea") {
+                html += `<div class="field-value field-multiline">${escapeHtml(value)}</div>`;
+            } else {
+                html += `<div class="field-value">${escapeHtml(value)}</div>`;
+            }
+            
+            html += `</div>`;
+        }
+    }
+    
+    html += '</div>';
+    return html;
+}
+
+function renderFieldsEdit(type, item, index) {
+    const schema = schemas[type];
+    let html = '<div class="field-grid-edit">';
     
     for (const [fieldKey, fieldDef] of Object.entries(schema.fields)) {
         const value = item[fieldKey] || "";
@@ -149,18 +189,116 @@ function renderFields(type, item, index) {
         html += `<label>${fieldDef.label}${fieldDef.required ? ' *' : ''}</label>`;
         
         if (fieldDef.type === "textarea") {
-            html += `<textarea id="${fieldId}" oninput="updateField('${type}', ${index}, '${fieldKey}', this.value)">${escapeHtml(value)}</textarea>`;
+            html += `<textarea id="${fieldId}" data-original="${escapeHtml(value)}">${escapeHtml(value)}</textarea>`;
         } else if (fieldDef.type === "links" || fieldDef.type === "link") {
-            html += `<input type="text" id="${fieldId}" value="${escapeHtml(value)}" oninput="updateField('${type}', ${index}, '${fieldKey}', this.value)" placeholder="Comma-separated IDs">`;
-            html += `<div style="margin-top: 8px;">${renderLinksPreview(value, fieldDef.targets)}</div>`;
+            html += `<input type="text" id="${fieldId}" value="${escapeHtml(value)}" placeholder="Comma-separated IDs" data-original="${escapeHtml(value)}">`;
+            html += `<div class="help-text">Enter IDs separated by commas (e.g., C1, C2, F1)</div>`;
         } else {
-            html += `<input type="text" id="${fieldId}" value="${escapeHtml(value)}" oninput="updateField('${type}', ${index}, '${fieldKey}', this.value)">`;
+            html += `<input type="text" id="${fieldId}" value="${escapeHtml(value)}" data-original="${escapeHtml(value)}">`;
         }
         
         html += `</div>`;
     }
     
+    html += '</div>';
     return html;
+}
+
+function toggleEditMode(type, index, event) {
+    event.stopPropagation();
+    
+    const viewMode = document.getElementById(`body-${type}-${index}`);
+    const editMode = document.getElementById(`body-edit-${type}-${index}`);
+    const editBtn = event.target.closest('.btn-edit');
+    
+    const isCurrentlyEditing = editMode.style.display !== 'none';
+    
+    if (isCurrentlyEditing) {
+        // Switch back to view mode
+        viewMode.style.display = 'block';
+        editMode.style.display = 'none';
+        editBtn.innerHTML = '✏️ Edit';
+        editBtn.classList.remove('editing');
+    } else {
+        // Switch to edit mode
+        viewMode.style.display = 'none';
+        editMode.style.display = 'block';
+        editBtn.innerHTML = '👁️ View';
+        editBtn.classList.add('editing');
+    }
+}
+
+function saveEdit(type, index) {
+    const schema = schemas[type];
+    let hasChanges = false;
+    
+    // Collect all field values
+    for (const fieldKey of Object.keys(schema.fields)) {
+        const fieldId = `field-${type}-${index}-${fieldKey}`;
+        const inputEl = document.getElementById(fieldId);
+        
+        if (inputEl) {
+            const newValue = inputEl.value;
+            const oldValue = data[type][index][fieldKey] || "";
+            
+            if (newValue !== oldValue) {
+                data[type][index][fieldKey] = newValue;
+                hasChanges = true;
+            }
+        }
+    }
+    
+    if (hasChanges) {
+        saveToLocalStorage();
+        renderSidebarNav();
+        
+        // Re-render the card
+        const card = document.getElementById(`card-${type}-${data[type][index].id}`);
+        const newCard = createComponentCard(type, data[type][index], index);
+        card.replaceWith(newCard);
+        
+        showToast("✓ Changes saved successfully!", "success");
+    } else {
+        // Just switch back to view mode
+        toggleEditMode(type, index, { target: document.querySelector(`#card-${type}-${data[type][index].id} .btn-edit`), stopPropagation: () => {} });
+    }
+}
+
+function cancelEdit(type, index) {
+    const schema = schemas[type];
+    
+    // Restore original values
+    for (const fieldKey of Object.keys(schema.fields)) {
+        const fieldId = `field-${type}-${index}-${fieldKey}`;
+        const inputEl = document.getElementById(fieldId);
+        
+        if (inputEl && inputEl.dataset.original !== undefined) {
+            inputEl.value = inputEl.dataset.original;
+        }
+    }
+    
+    // Switch back to view mode
+    const viewMode = document.getElementById(`body-${type}-${index}`);
+    const editMode = document.getElementById(`body-edit-${type}-${index}`);
+    const card = document.getElementById(`card-${type}-${data[type][index].id}`);
+    const editBtn = card.querySelector('.btn-edit');
+    
+    viewMode.style.display = 'block';
+    editMode.style.display = 'none';
+    editBtn.innerHTML = '✏️ Edit';
+    editBtn.classList.remove('editing');
+    
+    showToast("Changes discarded", "info", 2000);
+}
+
+function renderLinksPreview(value, targets) {
+    if (!value) return "";
+    const ids = value.split(",").map(id => id.trim()).filter(id => id);
+    return ids.map(id => {
+        const resolved = resolveLink(id, targets);
+        const name = resolved ? (resolved.name || resolved.topic || id) : id;
+        return `<span class="link-tag" onclick="navigateToComponent('${escapeHtml(id)}')" title="Click to navigate">${escapeHtml(name)} (${escapeHtml(id)})</span>`;
+    }).join(" ");
 }
 
 function renderLinksPreview(value, targets) {
