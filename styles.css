@@ -14,6 +14,50 @@
     --success: #10b981;
 }
 
+/* Dark theme base - applied via themes.js */
+body.dark-theme {
+    --text: #f1f5f9;
+    --text-dim: #94a3b8;
+}
+
+body.dark-theme .sidebar {
+    background: var(--card);
+}
+
+body.dark-theme .top-bar {
+    background: var(--card);
+}
+
+body.dark-theme .search-box input {
+    background: var(--bg);
+}
+
+body.dark-theme .component-card {
+    background: var(--card);
+}
+
+body.dark-theme input,
+body.dark-theme textarea,
+body.dark-theme select {
+    background: var(--bg);
+    color: var(--text);
+}
+
+body.dark-theme .modal-content {
+    background: var(--card);
+}
+
+body.dark-theme .btn.secondary {
+    background: var(--card-hover);
+    color: var(--text);
+}
+
+body.dark-theme .icon-btn {
+    background: var(--card);
+    color: var(--text);
+    border-color: var(--border);
+}
+
 * {
     margin: 0;
     padding: 0;
