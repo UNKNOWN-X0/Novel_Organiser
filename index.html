@@ -37,8 +37,8 @@
         </div>
 
         <div class="sidebar-actions">
-            <button onclick="showLoadModal()" class="sidebar-btn secondary">📂 Import</button>
-            <button onclick="downloadJSON()" class="sidebar-btn primary">💾 Export JSON</button>
+            <button onclick="showLoadModal()" class="sidebar-btn secondary">Import</button>
+            <button onclick="downloadJSON()" class="sidebar-btn primary">Export JSON</button>
         </div>
     </aside>
 
@@ -52,9 +52,9 @@
                 <span class="breadcrumb-item current" id="breadcrumbSection">Characters</span>
             </div>
             <div class="top-actions">
-                <button onclick="showSettingsModal()" class="icon-btn">⚙️</button>
-                <button onclick="copyJSON()" class="icon-btn">📋</button>
-                <button onclick="openJSONPreview()" class="icon-btn">👁️</button>
+                <button onclick="showSettingsModal()" class="icon-btn" title="Settings">⚙</button>
+                <button onclick="copyJSON()" class="icon-btn" title="Copy JSON">⎘</button>
+                <button onclick="openJSONPreview()" class="icon-btn" title="Preview">👁</button>
             </div>
         </header>
 
@@ -65,12 +65,12 @@
                     <p class="content-subtitle" id="contentSubtitle">People and beings in your world.</p>
                 </div>
                 <button class="btn-add-new" onclick="addComponent(currentTab)">
-                    <span class="btn-icon">+</span> Add New
+                    Add New
                 </button>
             </div>
 
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="🔍 Search by name or ID..." oninput="filterComponents()">
+                <input type="text" id="searchInput" placeholder="Search by name or ID..." oninput="filterComponents()">
             </div>
 
             <div id="content"></div>
