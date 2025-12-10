@@ -46,7 +46,9 @@ const schemas = {
     },
     majorEvents: {
         label: "Major Events",
-        icon: "⚡",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star mr-2 h-4 w-4" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>`,
         fields: {
             id: { type: "text", label: "ID", required: true },
             name: { type: "text", label: "Name", required: true },
@@ -59,7 +61,11 @@ const schemas = {
     },
     globalEvents: {
         label: "Global Events",
-        icon: "🌐",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe mr-2 h-4 w-4" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                  <path d="M2 12h20"></path>
+                </svg>`,
         fields: {
             id: { type: "text", label: "ID", required: true },
             name: { type: "text", label: "Name", required: true },
@@ -73,7 +79,10 @@ const schemas = {
     },
     locations: {
         label: "Locations",
-        icon: "🗺️",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin mr-2 h-4 w-4" aria-hidden="true">
+                  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>`,
         fields: {
             id: { type: "text", label: "ID", required: true },
             name: { type: "text", label: "Name", required: true },
@@ -87,7 +96,9 @@ const schemas = {
     },
     factions: {
         label: "Factions",
-        icon: "⚔️",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-flag mr-2 h-4 w-4" aria-hidden="true">
+                  <path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528"></path>
+                </svg>`,
         fields: {
             id: { type: "text", label: "ID", required: true },
             name: { type: "text", label: "Name", required: true },
@@ -104,7 +115,11 @@ const schemas = {
     },
     items: {
         label: "Items",
-        icon: "🗡️",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gem mr-2 h-4 w-4" aria-hidden="true">
+                  <path d="M10.5 3 8 9l4 13 4-13-2.5-6"></path>
+                  <path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z"></path>
+                  <path d="M2 9h20"></path>
+                </svg>`,
         fields: {
             id: { type: "text", label: "ID", required: true },
             name: { type: "text", label: "Name", required: true },
@@ -120,7 +135,10 @@ const schemas = {
     },
     lore: {
         label: "Lore",
-        icon: "📜",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open mr-2 h-4 w-4" aria-hidden="true">
+                  <path d="M12 7v14"></path>
+                  <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>
+                </svg>`,
         fields: {
             id: { type: "text", label: "ID", required: true },
             topic: { type: "text", label: "Topic", required: true },
