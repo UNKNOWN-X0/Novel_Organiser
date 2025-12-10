@@ -503,7 +503,6 @@ body {
     margin-bottom: 24px;
     padding-bottom: 20px;
     border-bottom: 2px solid var(--border);
-    cursor: pointer;
     user-select: none;
 }
 
@@ -514,24 +513,37 @@ body {
     transition: color 0.2s ease;
 }
 
-.component-header:hover .component-title {
-    color: var(--accent);
-}
-
 .component-controls {
     display: flex;
     gap: 10px;
 }
 
-.component-controls button {
-    padding: 8px 16px;
+.component-controls button,
+.btn-edit {
+    padding: 10px 18px;
     border: 2px solid var(--border);
     background: var(--card);
     border-radius: 8px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
+}
+
+.btn-edit {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.btn-edit:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-edit.editing {
+    background: var(--info);
 }
 
 .component-controls button:hover {
@@ -551,9 +563,70 @@ body {
 }
 
 .component-body {
+    animation: slideDown 0.3s ease;
+}
+
+.component-body.view-mode {
+    display: block;
+}
+
+.component-body.edit-mode {
+    display: none;
+}
+
+/* View Mode Styles */
+.field-grid {
     display: grid;
     gap: 20px;
-    animation: slideDown 0.3s ease;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.field-display {
+    padding: 16px;
+    background: var(--bg);
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    transition: all 0.2s ease;
+}
+
+.field-display:hover {
+    border-color: var(--accent-light);
+    transform: translateY(-2px);
+}
+
+.field-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+}
+
+.field-value {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.field-multiline {
+    white-space: pre-wrap;
+    line-height: 1.6;
+}
+
+/* Edit Mode Styles */
+.field-grid-edit {
+    display: grid;
+    gap: 20px;
+}
+
+.edit-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 2px solid var(--border);
 }
 
 @keyframes slideDown {
@@ -565,10 +638,6 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-.component-body.collapsed {
-    display: none;
 }
 
 .input-group {
