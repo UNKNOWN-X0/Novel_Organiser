@@ -152,13 +152,13 @@ const schemas = {
     worldRules: {
         label: "World Rules",
         icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <!-- Accretion disk rings -->
-                  <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.7"></circle>
-                  <circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="1" fill="none" opacity="0.8"></circle>
-                  <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.9"></circle>
+                  <!-- Maximum size rings -->
+                  <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="0.75" fill="none"></circle>
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1" fill="none"></circle>
+                  <circle cx="12" cy="12" r="7" stroke="currentColor" stroke-width="1.25" fill="none"></circle>
                   
                   <!-- Black hole singularity -->
-                  <circle cx="12" cy="12" r="2" fill="black" stroke="currentColor"></circle>
+                  <circle cx="12" cy="12" r="3.5" fill="black" stroke="currentColor"></circle>
                 </svg>`,
         fields: {
             id: { type: "text", label: "ID", required: true },
