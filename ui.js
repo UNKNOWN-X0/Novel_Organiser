@@ -17,13 +17,31 @@ function renderSidebarNav() {
             updateBreadcrumb();
         };
         
-        item.innerHTML = `
-            <div class="sidebar-nav-item-content">
-                <span class="sidebar-nav-item-icon">${schema.icon}</span>
-                <span>${schema.label}</span>
-            </div>
-            <span class="sidebar-nav-item-count">${data[key].length}</span>
-        `;
+        // Create the content div
+        const contentDiv = document.createElement("div");
+        contentDiv.className = "sidebar-nav-item-content";
+        
+        // Create icon container and set its innerHTML
+        const iconSpan = document.createElement("span");
+        iconSpan.className = "sidebar-nav-item-icon";
+        iconSpan.innerHTML = schema.icon;
+        
+        // Create text span
+        const textSpan = document.createElement("span");
+        textSpan.textContent = schema.label;
+        
+        // Append icon and text to content div
+        contentDiv.appendChild(iconSpan);
+        contentDiv.appendChild(textSpan);
+        
+        // Create count span
+        const countSpan = document.createElement("span");
+        countSpan.className = "sidebar-nav-item-count";
+        countSpan.textContent = data[key].length;
+        
+        // Append everything to item
+        item.appendChild(contentDiv);
+        item.appendChild(countSpan);
         
         navEl.appendChild(item);
     });
