@@ -16,7 +16,7 @@ const themes = {
         cardGradient: "linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)"
     },
     fantasy: {
-        name: "🌲 Enchanted Forest",
+        name: "Enchanted Forest",
         accent: "#10b981",
         accentDark: "#059669",
         accentLight: "#6ee7b7",
@@ -31,7 +31,7 @@ const themes = {
         cardGradient: "linear-gradient(135deg, #0f2318 0%, #1a3828 100%)"
     },
     darkFantasy: {
-        name: "🌑 Shadow Realm",
+        name: "Shadow Realm",
         accent: "#c084fc",
         accentDark: "#9333ea",
         accentLight: "#e9d5ff",
@@ -46,7 +46,7 @@ const themes = {
         cardGradient: "linear-gradient(135deg, #1a1028 0%, #2a1838 100%)"
     },
     scifi: {
-        name: "🚀 Neon Cybercity",
+        name: "Neon Cybercity",
         accent: "#06b6d4",
         accentDark: "#0891b2",
         accentLight: "#67e8f9",
@@ -61,7 +61,7 @@ const themes = {
         cardGradient: "linear-gradient(135deg, rgba(15, 30, 46, 0.9) 0%, rgba(26, 50, 77, 0.6) 100%)"
     },
     cyberpunk: {
-        name: "🌃 Neon Dreams",
+        name: "Neon Dreams",
         accent: "#f0abfc",
         accentDark: "#e879f9",
         accentLight: "#fae8ff",
@@ -76,7 +76,7 @@ const themes = {
         cardGradient: "linear-gradient(135deg, #1a0b2e 0%, #2d1548 100%)"
     },
     xianxia: {
-        name: "⚡ Golden Immortal",
+        name: "Golden Immortal",
         accent: "#fbbf24",
         accentDark: "#f59e0b",
         accentLight: "#fef3c7",
@@ -91,7 +91,7 @@ const themes = {
         cardGradient: "linear-gradient(135deg, #2d1f0a 0%, #4d3514 100%)"
     },
     wuxia: {
-        name: "🗡️ Blood Moon",
+        name: "Blood Moon",
         accent: "#f87171",
         accentDark: "#dc2626",
         accentLight: "#fecaca",
@@ -106,7 +106,7 @@ const themes = {
         cardGradient: "linear-gradient(135deg, #2d0f0f 0%, #4d1818 100%)"
     },
     cultivation: {
-        name: "🧘 Jade Lotus",
+        name: "Jade Lotus",
         accent: "#4ade80",
         accentDark: "#22c55e",
         accentLight: "#bbf7d0",
@@ -121,7 +121,7 @@ const themes = {
         cardGradient: "linear-gradient(135deg, #0f1f0d 0%, #1f3d1a 100%)"
     },
     litrpg: {
-        name: "🎮 Game Interface",
+        name: "Game Interface",
         accent: "#a3e635",
         accentDark: "#84cc16",
         accentLight: "#d9f99d",
@@ -136,7 +136,7 @@ const themes = {
         cardGradient: "linear-gradient(135deg, rgba(26, 40, 32, 0.9) 0%, rgba(42, 72, 48, 0.6) 100%)"
     },
     horror: {
-        name: "🩸 Crimson Terror",
+        name: "Crimson Terror",
         accent: "#ef4444",
         accentDark: "#dc2626",
         accentLight: "#fca5a5",
@@ -151,7 +151,7 @@ const themes = {
         cardGradient: "linear-gradient(135deg, #1a1414 0%, #2d2121 100%)"
     },
     cosmicHorror: {
-        name: "👁️ Void Abyss",
+        name: "Void Abyss",
         accent: "#a78bfa",
         accentDark: "#8b5cf6",
         accentLight: "#c4b5fd",
@@ -166,7 +166,7 @@ const themes = {
         cardGradient: "linear-gradient(135deg, #0d0d1f 0%, #1a1a3e 100%)"
     },
     romance: {
-        name: "💖 Rose Garden",
+        name: "Rose Garden",
         accent: "#f472b6",
         accentDark: "#ec4899",
         accentLight: "#fbcfe8",
@@ -181,7 +181,7 @@ const themes = {
         cardGradient: "linear-gradient(135deg, #2d1724 0%, #4d2844 100%)"
     },
     ocean: {
-        name: "🌊 Deep Sea",
+        name: "Deep Sea",
         accent: "#3b82f6",
         accentDark: "#2563eb",
         accentLight: "#93c5fd",
@@ -196,7 +196,7 @@ const themes = {
         cardGradient: "linear-gradient(135deg, #0c1e2e 0%, #1e3a5f 100%)"
     },
     sunset: {
-        name: "🌅 Golden Hour",
+        name: "Golden Hour",
         accent: "#f59e0b",
         accentDark: "#d97706",
         accentLight: "#fcd34d",
@@ -211,7 +211,7 @@ const themes = {
         cardGradient: "linear-gradient(135deg, #2d1f0f 0%, #4d351f 100%)"
     },
     arctic: {
-        name: "❄️ Frozen Tundra",
+        name: "Frozen Tundra",
         accent: "#38bdf8",
         accentDark: "#0ea5e9",
         accentLight: "#bae6fd",
@@ -224,8 +224,7 @@ const themes = {
         bgPattern: "linear-gradient(135deg, #1a2733 0%, #0f1419 50%, #0a0f14 100%)",
         sidebarGradient: "linear-gradient(180deg, #1a2733 0%, #0f1419 100%)",
         cardGradient: "linear-gradient(135deg, rgba(26, 39, 51, 0.9) 0%, rgba(45, 66, 82, 0.6) 100%)"
-    }
-};
+    },
     fantasy: {
         name: "Fantasy",
         accent: "#10b981",
