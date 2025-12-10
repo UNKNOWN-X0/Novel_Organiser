@@ -7,68 +7,105 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🌍 World Builder</h1>
-            <p>Story & worldbuilding editor - Load from Google Drive or GitHub, edit, and export</p>
-            
-            <div class="controls">
-                <button onclick="showLoadModal()">📂 Load JSON</button>
-                <button onclick="downloadJSON()" class="secondary">💾 Download JSON</button>
-                <button onclick="copyJSON()" class="secondary">📋 Copy JSON</button>
-                <button onclick="openJSONPreview()" class="secondary">👁️ Preview JSON</button>
-                <button onclick="showSettingsModal()" class="secondary">⚙️ Settings</button>
-                <button onclick="resetData()" class="danger">🗑️ Reset All</button>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>📖 <span id="sidebarProjectTitle">Novel Org</span></h2>
+            <button class="icon-btn" onclick="toggleSidebar()">☰</button>
+        </div>
+
+        <div class="sidebar-section">
+            <h3 class="sidebar-section-title">Project Structure</h3>
+            <nav class="sidebar-nav" id="sidebarNav"></nav>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-input-group">
+                <label>Project Title</label>
+                <input type="text" id="projectTitleSidebar" oninput="updateMeta('title', this.value)">
+            </div>
+
+            <div class="sidebar-input-group">
+                <label>Author</label>
+                <input type="text" id="projectAuthor" placeholder="Your name" oninput="updateMeta('author', this.value)">
+            </div>
+
+            <div class="sidebar-input-group">
+                <label>Theme</label>
+                <select id="themeSelect" onchange="applyTheme(this.value)"></select>
+            </div>
+        </div>
+
+        <div class="sidebar-actions">
+            <button onclick="showLoadModal()" class="sidebar-btn secondary">📂 Import</button>
+            <button onclick="downloadJSON()" class="sidebar-btn primary">💾 Export JSON</button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="top-bar">
+            <div class="breadcrumb">
+                <span class="breadcrumb-label">Project:</span>
+                <span class="breadcrumb-item" id="breadcrumbProject">My World</span>
+                <span class="breadcrumb-separator">›</span>
+                <span class="breadcrumb-item current" id="breadcrumbSection">Characters</span>
+            </div>
+            <div class="top-actions">
+                <button onclick="showSettingsModal()" class="icon-btn">⚙️</button>
+                <button onclick="copyJSON()" class="icon-btn">📋</button>
+                <button onclick="openJSONPreview()" class="icon-btn">👁️</button>
             </div>
         </header>
 
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="🔍 Search by name or ID..." oninput="filterComponents()">
-        </div>
+        <div class="content-area">
+            <div class="content-header">
+                <div class="content-title-section">
+                    <h1 id="contentTitle">Characters</h1>
+                    <p class="content-subtitle" id="contentSubtitle">People and beings in your world.</p>
+                </div>
+                <button class="btn-add-new" onclick="addComponent(currentTab)">
+                    <span class="btn-icon">+</span> Add New
+                </button>
+            </div>
 
-        <div class="tabs" id="tabs"></div>
-        <div id="content"></div>
-    </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Search by name or ID..." oninput="filterComponents()">
+            </div>
+
+            <div id="content"></div>
+        </div>
+    </main>
 
     <!-- Load Modal -->
     <div id="loadModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">Load JSON Data</div>
-            <div class="input-group">
-                <label>Paste Google Drive or GitHub Link:</label>
-                <input type="text" id="linkInput" placeholder="https://drive.google.com/file/d/.../view or https://github.com/.../file.json">
-                <div class="help-text">
-                    Google Drive: Share link → converted to direct download<br>
-                    GitHub: File URL → converted to raw.githubusercontent.com
+            <div class="modal-header">
+                <h2>Import JSON Data</h2>
+                <button class="modal-close" onclick="closeModal('loadModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label>Paste Google Drive or GitHub Link:</label>
+                    <input type="text" id="linkInput" placeholder="https://drive.google.com/file/d/.../view">
+                    <div class="help-text">
+                        Google Drive: Share link → converted to direct download<br>
+                        GitHub: File URL → converted to raw.githubusercontent.com
+                    </div>
                 </div>
-            </div>
-            <div class="controls">
-                <button onclick="loadFromLink()">Load from Link</button>
-                <button onclick="closeModal('loadModal')" class="secondary">Cancel</button>
-            </div>
-            <hr style="margin: 20px 0; border: none; border-top: 1px solid var(--border);">
-            <div class="input-group">
-                <label>Or paste JSON directly:</label>
-                <textarea id="jsonInput" rows="10" placeholder='{"characters": [], "meta": {...}}'></textarea>
-            </div>
-            <div class="controls">
-                <button onclick="loadFromJSON()">Load JSON</button>
-            </div>
-            <div id="loadError"></div>
-            
-            <hr style="margin: 20px 0; border: none; border-top: 1px solid var(--border);">
-            <div style="font-size: 13px; color: var(--text-dim); line-height: 1.8;">
-                <strong>📖 GitHub Hosting Guide:</strong><br>
-                1. Create a public repo on GitHub<br>
-                2. Upload your .json file to the repo<br>
-                3. Open the file, click "Raw" button<br>
-                4. Copy the raw.githubusercontent.com URL<br>
-                5. Paste it above to load<br><br>
-                <strong>For GitHub Pages:</strong><br>
-                - Enable Pages in repo settings<br>
-                - Upload this index.html file<br>
-                - Access at https://username.github.io/repo/<br><br>
-                <strong>⚠️ Note:</strong> Private repos will fail due to permissions. Use public repos or Google Drive public share.
+                <div class="modal-actions">
+                    <button onclick="loadFromLink()" class="btn primary">Load from Link</button>
+                    <button onclick="closeModal('loadModal')" class="btn secondary">Cancel</button>
+                </div>
+                <hr class="divider">
+                <div class="input-group">
+                    <label>Or paste JSON directly:</label>
+                    <textarea id="jsonInput" rows="10" placeholder='{"characters": [], "meta": {...}}'></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button onclick="loadFromJSON()" class="btn primary">Load JSON</button>
+                </div>
+                <div id="loadError"></div>
             </div>
         </div>
     </div>
@@ -76,34 +113,34 @@
     <!-- Settings Modal -->
     <div id="settingsModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">Settings</div>
-            
-            <div class="input-group">
-                <label>Project Title:</label>
-                <input type="text" id="projectTitle" oninput="updateMeta('title', this.value)">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="modal-close" onclick="closeModal('settingsModal')">×</button>
             </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label>Language Code:</label>
+                    <input type="text" id="projectLanguage" placeholder="en, es, ja, ar, zh, hi, etc." oninput="updateMeta('language', this.value)">
+                    <div class="help-text">Examples: en (English), es (Spanish), ja (Japanese)</div>
+                </div>
 
-            <div class="input-group">
-                <label>Language Code:</label>
-                <input type="text" id="projectLanguage" placeholder="en, es, ja, ar, zh, hi, etc." oninput="updateMeta('language', this.value)">
-                <div class="help-text">Examples: en (English), es (Spanish), ja (Japanese), ar (Arabic), zh (Chinese), hi (Hindi)</div>
-            </div>
+                <div class="input-group">
+                    <label>Text Direction:</label>
+                    <select id="textDirection" onchange="setTextDirection(this.value)">
+                        <option value="ltr">Left-to-Right (LTR)</option>
+                        <option value="rtl">Right-to-Left (RTL)</option>
+                    </select>
+                </div>
 
-            <div class="input-group">
-                <label>Text Direction:</label>
-                <select id="textDirection" onchange="setTextDirection(this.value)">
-                    <option value="ltr">Left-to-Right (LTR)</option>
-                    <option value="rtl">Right-to-Left (RTL)</option>
-                </select>
-            </div>
+                <div class="input-group">
+                    <label>Theme:</label>
+                    <div class="theme-picker" id="themePicker"></div>
+                </div>
 
-            <div class="input-group">
-                <label>Theme:</label>
-                <div class="theme-picker" id="themePicker"></div>
-            </div>
-
-            <div style="margin-top: 20px;">
-                <button onclick="closeModal('settingsModal')" class="secondary">Close</button>
+                <div class="modal-actions">
+                    <button onclick="closeModal('settingsModal')" class="btn secondary">Close</button>
+                    <button onclick="resetData()" class="btn danger">Reset All Data</button>
+                </div>
             </div>
         </div>
     </div>
