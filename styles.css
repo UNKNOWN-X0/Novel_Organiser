@@ -72,6 +72,10 @@ body {
     font-weight: 700;
     color: var(--text);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    /* Add these lines for icon alignment */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Adjust spacing as needed */
 }
 
 .sidebar-section {
