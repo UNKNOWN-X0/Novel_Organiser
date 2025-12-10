@@ -128,10 +128,10 @@ function createComponentCard(type, item, index) {
             <div class="component-title">${schema.icon} ${displayName} <span style="color: var(--text-dim); font-size: 14px; font-weight: 400;">(${item.id})</span></div>
             <div class="component-controls">
                 <button class="btn-edit" onclick="toggleEditMode('${type}', ${index}, event)" data-editing="false">
-                    ✏️ Edit
+                    Edit
                 </button>
-                <button class="secondary" onclick="duplicateComponent('${type}', ${index})">📋 Duplicate</button>
-                <button class="danger" onclick="deleteComponent('${type}', ${index})">🗑️ Delete</button>
+                <button class="secondary" onclick="duplicateComponent('${type}', ${index})">Duplicate</button>
+                <button class="danger" onclick="deleteComponent('${type}', ${index})">Delete</button>
             </div>
         </div>
         <div class="component-body view-mode" id="body-${type}-${index}">
@@ -140,8 +140,8 @@ function createComponentCard(type, item, index) {
         <div class="component-body edit-mode" id="body-edit-${type}-${index}" style="display: none;">
             ${renderFieldsEdit(type, item, index)}
             <div class="edit-actions">
-                <button class="btn primary" onclick="saveEdit('${type}', ${index})">💾 Save Changes</button>
-                <button class="btn secondary" onclick="cancelEdit('${type}', ${index})">✖️ Cancel</button>
+                <button class="btn primary" onclick="saveEdit('${type}', ${index})">Save Changes</button>
+                <button class="btn secondary" onclick="cancelEdit('${type}', ${index})">Cancel</button>
             </div>
         </div>
     `;
@@ -191,7 +191,7 @@ function renderFieldsView(type, item, index) {
     // Add expand button to see all fields
     html += `<div class="expand-details">
         <button class="btn-expand" onclick="expandDetails('${type}', ${index}, event)">
-            📋 View All Details
+            View All Details
         </button>
     </div>`;
     
@@ -232,7 +232,7 @@ function expandDetails(type, index, event) {
     // Add collapse button
     html += `<div class="expand-details">
         <button class="btn-expand" onclick="collapseDetails('${type}', ${index}, event)">
-            ▲ Show Less
+            Show Less
         </button>
     </div>`;
     
@@ -291,13 +291,13 @@ function toggleEditMode(type, index, event) {
         // Switch back to view mode
         viewMode.style.display = 'block';
         editMode.style.display = 'none';
-        editBtn.innerHTML = '✏️ Edit';
+        editBtn.innerHTML = 'Edit';
         editBtn.classList.remove('editing');
     } else {
         // Switch to edit mode
         viewMode.style.display = 'none';
         editMode.style.display = 'block';
-        editBtn.innerHTML = '👁️ View';
+        editBtn.innerHTML = 'View';
         editBtn.classList.add('editing');
     }
 }
@@ -331,7 +331,7 @@ function saveEdit(type, index) {
         const newCard = createComponentCard(type, data[type][index], index);
         card.replaceWith(newCard);
         
-        showToast("Changes saved successfully!", "success");
+        showToast("✓ Changes saved successfully!", "success");
     } else {
         // Just switch back to view mode
         toggleEditMode(type, index, { target: document.querySelector(`#card-${type}-${data[type][index].id} .btn-edit`), stopPropagation: () => {} });
@@ -359,7 +359,7 @@ function cancelEdit(type, index) {
     
     viewMode.style.display = 'block';
     editMode.style.display = 'none';
-    editBtn.innerHTML = '✏️ Edit';
+    editBtn.innerHTML = 'Edit';
     editBtn.classList.remove('editing');
     
     showToast("Changes discarded", "info", 2000);
