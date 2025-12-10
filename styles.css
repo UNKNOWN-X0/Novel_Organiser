@@ -538,7 +538,7 @@ body {
     border: 2px solid var(--border);
     background: var(--bg);
     border-radius: 8px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -553,6 +553,7 @@ body {
 .btn-edit:hover {
     color: white;
     border-color: var(--accent-light);
+    font-size: 14px;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -562,7 +563,7 @@ body {
     border: 2px solid var(--border);
     background: var(--bg);
     border-radius: 8px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -571,11 +572,13 @@ body {
 
 .btn-edit.editing::before {
     content: '👁 ';
+    font-size: 14px;
 }
 
 .btn-edit.editing:hover {
     color: white;
     border-color: var(--accent-light);
+    font-size: 14px;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -585,7 +588,7 @@ body {
     border: 2px solid var(--border);
     background: var(--bg);
     border-radius: 8px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -600,6 +603,7 @@ body {
 .component-controls button.secondary:hover {
     color: white;
     border-color: var(--accent-light);
+    font-size: 14px;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -609,7 +613,7 @@ body {
     border: 2px solid var(--danger);
     background: var(--bg);
     border-radius: 8px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -624,6 +628,7 @@ body {
 .component-controls button.danger:hover {
     background: var(--danger);
     color: white;
+    font-size: 14px;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
