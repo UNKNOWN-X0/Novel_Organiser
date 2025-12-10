@@ -1,21 +1,31 @@
 // UI Rendering functions
 
-function renderTabs() {
-    const tabsEl = document.getElementById("tabs");
-    if (!tabsEl) return;
+function renderSidebarNav() {
+    const navEl = document.getElementById("sidebarNav");
+    if (!navEl) return;
     
-    tabsEl.innerHTML = "";
+    navEl.innerHTML = "";
+    
     Object.keys(schemas).forEach(key => {
         const schema = schemas[key];
-        const tab = document.createElement("button");
-        tab.className = "tab" + (key === currentTab ? " active" : "");
-        tab.textContent = `${schema.icon} ${schema.label} (${data[key].length})`;
-        tab.onclick = () => {
+        const item = document.createElement("div");
+        item.className = "sidebar-nav-item" + (key === currentTab ? " active" : "");
+        item.onclick = () => {
             currentTab = key;
-            renderTabs();
+            renderSidebarNav();
             renderContent();
+            updateBreadcrumb();
         };
-        tabsEl.appendChild(tab);
+        
+        item.innerHTML = `
+            <div class="sidebar-nav-item-content">
+                <span class="sidebar-nav-item-icon">${schema.icon}</span>
+                <span>${schema.label}</span>
+            </div>
+            <span class="sidebar-nav-item-count">${data[key].length}</span>
+        `;
+        
+        navEl.appendChild(item);
     });
 }
 
@@ -26,31 +36,78 @@ function renderContent() {
     const schema = schemas[currentTab];
     const items = data[currentTab];
     
+    // Update content title and subtitle
+    updateContentHeader();
+    
     const searchTerm = document.getElementById("searchInput").value.toLowerCase();
     const filtered = searchTerm ? items.filter(item => {
         const searchableText = JSON.stringify(item).toLowerCase();
         return searchableText.includes(searchTerm);
     }) : items;
 
-    content.innerHTML = `
-        <div class="component-list" id="componentList"></div>
-        <button class="add-component-btn" onclick="addComponent('${currentTab}')">
-            ➕ Add New ${schema.label.slice(0, -1)}
-        </button>
-    `;
+    content.innerHTML = '<div class="component-list" id="componentList"></div>';
 
     const listEl = document.getElementById("componentList");
-    filtered.forEach((item, index) => {
-        const actualIndex = items.indexOf(item);
-        listEl.appendChild(createComponentCard(currentTab, item, actualIndex));
-    });
     
-    // Show message if search has no results or empty state
     if (filtered.length === 0 && searchTerm) {
-        listEl.innerHTML = '<div class="empty-state">🔍 No components match your search</div>';
+        listEl.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-title">No results found</div>
+                <p>Try adjusting your search terms</p>
+            </div>
+        `;
     } else if (filtered.length === 0 && !searchTerm) {
-        listEl.innerHTML = `<div class="empty-state">📝 No ${schema.label.toLowerCase()} yet. Click the button below to add one!</div>`;
+        listEl.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-title">No entries yet.</div>
+                <p>Create your first ${schema.label.toLowerCase().slice(0, -1)} to get started.</p>
+                <button class="btn-add-new" onclick="addComponent('${currentTab}')" style="margin: 20px auto 0; display: inline-flex;">
+                    <span class="btn-icon">+</span> Create New
+                </button>
+            </div>
+        `;
+    } else {
+        filtered.forEach((item, index) => {
+            const actualIndex = items.indexOf(item);
+            listEl.appendChild(createComponentCard(currentTab, item, actualIndex));
+        });
     }
+}
+
+function updateContentHeader() {
+    const schema = schemas[currentTab];
+    const titleEl = document.getElementById("contentTitle");
+    const subtitleEl = document.getElementById("contentSubtitle");
+    
+    if (titleEl) titleEl.textContent = schema.label;
+    if (subtitleEl) {
+        const subtitles = {
+            characters: "People and beings in your world.",
+            minorEvents: "Small plot points and scenes.",
+            majorEvents: "Turning points and plot beats.",
+            globalEvents: "World-shaping historical events.",
+            locations: "Places and settings.",
+            factions: "Groups, organizations, and alliances.",
+            items: "Objects, artifacts, and equipment.",
+            lore: "Knowledge, myths, and world mechanics.",
+            worldRules: "Laws and systems governing your world."
+        };
+        subtitleEl.textContent = subtitles[currentTab] || "";
+    }
+}
+
+function updateBreadcrumb() {
+    const projectEl = document.getElementById("breadcrumbProject");
+    const sectionEl = document.getElementById("breadcrumbSection");
+    const schema = schemas[currentTab];
+    
+    if (projectEl) projectEl.textContent = data.meta.title || "My World";
+    if (sectionEl) sectionEl.textContent = schema.label;
+}
+
+function updateSidebarTitle() {
+    const titleEl = document.getElementById("sidebarProjectTitle");
+    if (titleEl) titleEl.textContent = data.meta.title || "Novel Org";
 }
 
 // Modal controls
@@ -69,10 +126,13 @@ function closeModal(id) {
     document.getElementById(id).classList.remove("active");
 }
 
+function toggleSidebar() {
+    document.querySelector(".sidebar").classList.toggle("open");
+}
+
 // Toast notifications
 let toastTimeout;
 function showToast(message, type = "info", duration = 3000) {
-    // Remove existing toasts
     const existingToasts = document.querySelectorAll(".toast");
     existingToasts.forEach(t => t.remove());
     
@@ -103,13 +163,11 @@ document.addEventListener("click", (e) => {
 
 // Keyboard shortcuts
 document.addEventListener("keydown", (e) => {
-    // Ctrl/Cmd + S to save (download)
     if ((e.ctrlKey || e.metaKey) && e.key === "s") {
         e.preventDefault();
         downloadJSON();
     }
     
-    // Escape to close modals
     if (e.key === "Escape") {
         document.querySelectorAll(".modal").forEach(modal => {
             modal.classList.remove("active");
