@@ -1,3 +1,8 @@
+/* ============================================================
+   1) THEME & GLOBAL VARIABLES
+   These CSS variables control the color system and can be overridden
+   dynamically by themes.js at runtime.
+   ============================================================ */
 :root {
     --accent: #10b981;
     --accent-dark: #059669;
@@ -17,6 +22,10 @@
     --card-gradient: none;
 }
 
+/* ============================================================
+   2) RESET + BASE LAYOUT
+   Basic reset and body-level styles used app-wide.
+   ============================================================ */
 * {
     margin: 0;
     padding: 0;
@@ -36,7 +45,10 @@ body {
     transition: background 0.3s ease;
 }
 
-/* Sidebar */
+/* ============================================================
+   3) SIDEBAR (navigation + project metadata + import/export)
+   Responsible for the left fixed panel UI.
+   ============================================================ */
 .sidebar {
     width: 280px;
     background: var(--sidebar-bg);
@@ -58,6 +70,7 @@ body {
     transform: translateX(-280px);
 }
 
+/* Header area inside the sidebar (title + icon + toggle) */
 .sidebar-header {
     padding: 24px 20px;
     border-bottom: 1px solid var(--border);
@@ -78,11 +91,13 @@ body {
     gap: 0.5rem; /* Adjust spacing as needed */
 }
 
+/* Generic section inside sidebar, used for grouping */
 .sidebar-section {
     padding: 20px;
     border-bottom: 1px solid var(--border);
 }
 
+/* Section titles (small uppercase labels) */
 .sidebar-section-title {
     font-size: 11px;
     font-weight: 700;
@@ -92,12 +107,14 @@ body {
     letter-spacing: 1px;
 }
 
+/* Navigation list inside sidebar (project structure links) */
 .sidebar-nav {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
+/* Each nav item (clickable) */
 .sidebar-nav-item {
     display: flex;
     align-items: center;
@@ -113,6 +130,7 @@ body {
     overflow: hidden;
 }
 
+/* Decorative left indicator that animates on hover/active */
 .sidebar-nav-item::before {
     content: '';
     position: absolute;
@@ -134,6 +152,7 @@ body {
     transform: scaleY(1);
 }
 
+/* Active nav item styling */
 .sidebar-nav-item.active {
     background: var(--accent);
     color: white;
@@ -146,6 +165,7 @@ body {
     background: white;
 }
 
+/* Content layout inside a nav item (icon + label) */
 .sidebar-nav-item-content {
     display: flex;
     align-items: center;
@@ -170,6 +190,7 @@ body {
     fill: none;
 }
 
+/* Small count bubble on the right of nav items */
 .sidebar-nav-item-count {
     font-size: 11px;
     font-weight: 700;
@@ -186,6 +207,7 @@ body {
     color: white;
 }
 
+/* Input groups inside sidebar (project meta: title, author, theme) */
 .sidebar-input-group {
     margin-bottom: 16px;
 }
@@ -220,6 +242,7 @@ body {
     transform: translateY(-1px);
 }
 
+/* Bottom area with import/export buttons */
 .sidebar-actions {
     padding: 20px;
     margin-top: auto;
@@ -229,6 +252,7 @@ body {
     background: linear-gradient(to top, rgba(0, 0, 0, 0.02), transparent);
 }
 
+/* Generic styling for sidebar action buttons */
 .sidebar-btn {
     width: 100%;
     padding: 12px;
@@ -242,6 +266,7 @@ body {
     overflow: hidden;
 }
 
+/* A soft ripple/highlight effect */
 .sidebar-btn::before {
     content: '';
     position: absolute;
@@ -260,6 +285,7 @@ body {
     height: 300px;
 }
 
+/* Primary & secondary button variants */
 .sidebar-btn.primary {
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
     color: white;
@@ -282,7 +308,10 @@ body {
     transform: translateY(-2px);
 }
 
-/* Main Content */
+/* ============================================================
+   4) MAIN CONTENT (top bar, breadcrumbs, actions, container)
+   The main working area where components and editors render.
+   ============================================================ */
 .main-content {
     flex: 1;
     margin-left: 280px;
@@ -291,6 +320,7 @@ body {
     min-height: 100vh;
 }
 
+/* Top bar (sticky) with breadcrumb and action icons */
 .top-bar {
     background: var(--card);
     background-image: var(--card-gradient);
@@ -306,6 +336,7 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+/* Breadcrumb layout */
 .breadcrumb {
     display: flex;
     align-items: center;
@@ -336,11 +367,13 @@ body {
     font-weight: 300;
 }
 
+/* Top-right action buttons container */
 .top-actions {
     display: flex;
     gap: 10px;
 }
 
+/* Icons in the top bar (settings, copy, preview) */
 .icon-btn {
     width: 40px;
     height: 40px;
@@ -364,6 +397,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Main content wrapper */
 .content-area {
     flex: 1;
     padding: 40px;
@@ -372,6 +406,7 @@ body {
     width: 100%;
 }
 
+/* Header for the content section: title + add button */
 .content-header {
     display: flex;
     justify-content: space-between;
@@ -392,6 +427,7 @@ body {
     font-weight: 500;
 }
 
+/* Big "Add New" button */
 .btn-add-new {
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
     color: white;
@@ -410,6 +446,7 @@ body {
     overflow: hidden;
 }
 
+/* Subtle sliding shine on hover */
 .btn-add-new::before {
     content: '';
     position: absolute;
@@ -436,6 +473,7 @@ body {
     font-weight: 700;
 }
 
+/* Search box */
 .search-box {
     margin-bottom: 28px;
 }
@@ -460,7 +498,10 @@ body {
     transform: translateY(-2px);
 }
 
-/* Component Cards */
+/* ============================================================
+   5) COMPONENT CARDS
+   The cards representing characters, locations, items, etc.
+   ============================================================ */
 .component-list {
     display: grid;
     gap: 20px;
@@ -500,17 +541,14 @@ body {
     transform: scaleX(1);
 }
 
+/* Highlighted card (special attention) */
 .component-card.highlight {
     border-color: var(--accent);
     box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
     animation: highlight-pulse 1s ease-in-out;
 }
 
-@keyframes highlight-pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-}
-
+/* Card header with controls */
 .component-header {
     display: flex;
     justify-content: space-between;
@@ -528,6 +566,7 @@ body {
     transition: color 0.2s ease;
 }
 
+/* Controls (edit, duplicate, delete) */
 .component-controls {
     display: flex;
     gap: 10px;
@@ -546,6 +585,7 @@ body {
     color: white;
 }
 
+/* Edit button prefix icon */
 .btn-edit::before {
     content: '✎ ';
     font-size: 14px;
@@ -559,6 +599,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Editing mode style for edit button (uses an inline svg indicator) */
 .btn-edit.editing {
     padding: 10px 18px;
     border: 2px solid var(--border);
@@ -572,7 +613,7 @@ body {
 }
 
 .btn-edit.editing::before {
-    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'%3E%3Cpath d='M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962'%3E%3C/path%3E%3Ccircle cx='12' cy='12' r='3'%3E%3C/circle%3E%3C/svg%3E");
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'%3E%3Cpath d='M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962'%3E%3C/path%3E%3Ccircle cx='12' cy='12' r='3'%3E%3C/circle%3E%3C/svg%3E");
     font-size: 14px;
 }
 
@@ -584,6 +625,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Secondary control style (duplicate) */
 .component-controls button.secondary {
     padding: 10px 18px;
     border: 2px solid var(--border);
@@ -597,7 +639,7 @@ body {
 }
 
 .component-controls button.secondary::before {
-    content: '⎘ ';
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' stroke='currentColor' fill='none' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' shape-rendering='geometricPrecision'%3E%3Cpath d='M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75'%3E%3C/path%3E%3C/svg%3E");
     font-size: 14px;
 }
 
@@ -609,6 +651,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Danger control (delete) */
 .component-controls button.danger {
     padding: 10px 18px;
     border: 2px solid var(--danger);
@@ -634,10 +677,12 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Body area inside a component card */
 .component-body {
     animation: slideDown 0.3s ease;
 }
 
+/* Toggle styles for edit/view modes */
 .component-body.view-mode {
     display: block;
 }
@@ -646,7 +691,10 @@ body {
     display: none;
 }
 
-/* View Mode Styles */
+/* ============================================================
+   6) VIEW MODE (compact summary) & EXPAND DETAILS
+   Small preview chips and expansion button.
+   ============================================================ */
 .field-grid-summary {
     display: flex;
     flex-wrap: wrap;
@@ -708,7 +756,10 @@ body {
     background: var(--bg);
 }
 
-/* Full Details View */
+/* ============================================================
+   7) FULL DETAILS LAYOUT
+   The grid used to show full read-only fields for a component.
+   ============================================================ */
 .field-grid-full {
     display: grid;
     gap: 20px;
@@ -754,7 +805,10 @@ body {
     line-height: 1.6;
 }
 
-/* Edit Mode Styles */
+/* ============================================================
+   8) EDIT MODE (forms & edit actions)
+   Grid layout/spacing for edit forms and action buttons.
+   ============================================================ */
 .field-grid-edit {
     display: grid;
     gap: 20px;
@@ -768,6 +822,18 @@ body {
     border-top: 2px solid var(--border);
 }
 
+/* ============================================================
+   9) ANIMATIONS (kept exactly as in your original file)
+   Definitions used by components, modals and cards.
+   ============================================================ */
+
+/* Pulsing highlight animation used for highlighted cards */
+@keyframes highlight-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* Slide down animation for component opening */
 @keyframes slideDown {
     from {
         opacity: 0;
@@ -779,6 +845,40 @@ body {
     }
 }
 
+/* Modal/backdrop fade in */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Modal slide up entrance */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Toast slide in from right */
+@keyframes slideIn {
+    from {
+        transform: translateX(500px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ============================================================
+   10) FORM ELEMENTS (inputs, textareas, selects)
+   General styling for inputs and focus states.
+   ============================================================ */
 .input-group {
     margin-bottom: 18px;
 }
@@ -822,6 +922,9 @@ textarea {
     line-height: 1.6;
 }
 
+/* ============================================================
+   11) TAGS / LINK CHIPS (inline labels used for URL tags etc.)
+   ============================================================ */
 .link-tag {
     display: inline-flex;
     align-items: center;
@@ -844,6 +947,9 @@ textarea {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
+/* ============================================================
+   12) EMPTY STATE (displayed when no content exists yet)
+   ============================================================ */
 .empty-state {
     text-align: center;
     padding: 100px 20px;
@@ -858,7 +964,10 @@ textarea {
     color: var(--text);
 }
 
-/* Modal */
+/* ============================================================
+   13) MODALS (load modal, settings modal, etc.)
+   Popovers that cover the viewport. Controlled by .active.
+   ============================================================ */
 .modal {
     display: none;
     position: fixed;
@@ -873,11 +982,6 @@ textarea {
     justify-content: center;
     padding: 20px;
     animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
 }
 
 .modal.active {
@@ -895,17 +999,6 @@ textarea {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     animation: slideUp 0.3s ease;
     border: 2px solid var(--border);
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px) scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
 }
 
 .modal-header {
@@ -951,6 +1044,9 @@ textarea {
     margin-top: 24px;
 }
 
+/* ============================================================
+   14) BUTTONS (generic and variant classes used throughout)
+   ============================================================ */
 .btn {
     padding: 12px 24px;
     border: none;
@@ -995,12 +1091,14 @@ textarea {
     box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
 }
 
+/* Divider style used in modals */
 .divider {
     border: none;
     border-top: 2px solid var(--border);
     margin: 28px 0;
 }
 
+/* Small helper text / hints */
 .help-text {
     font-size: 12px;
     color: var(--text-dim);
@@ -1009,6 +1107,7 @@ textarea {
     font-style: italic;
 }
 
+/* Error / success messages used inside modals or forms */
 .error-message {
     background: linear-gradient(135deg, #fee 0%, #fdd 100%);
     border: 2px solid var(--danger);
@@ -1033,6 +1132,9 @@ textarea {
     font-weight: 600;
 }
 
+/* ============================================================
+   15) TOAST (temporary notifications)
+   ============================================================ */
 .toast {
     position: fixed;
     bottom: 32px;
@@ -1050,17 +1152,9 @@ textarea {
     animation: slideIn 0.3s ease;
 }
 
-@keyframes slideIn {
-    from {
-        transform: translateX(500px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
+/* ============================================================
+   16) THEME PICKER + THEME OPTION STYLES (settings modal)
+   ============================================================ */
 .theme-picker {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -1108,7 +1202,10 @@ textarea {
     box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
 }
 
-/* Scrollbar */
+/* ============================================================
+   17) SCROLLBAR CUSTOMIZATION
+   These are webkit-only; graceful fallback for other browsers.
+   ============================================================ */
 ::-webkit-scrollbar {
     width: 12px;
 }
@@ -1128,7 +1225,10 @@ textarea {
     background: var(--accent-dark);
 }
 
-/* Responsive */
+/* ============================================================
+   18) RESPONSIVE ADJUSTMENTS (mobile)
+   Collapses sidebar and improves spacing for small screens.
+   ============================================================ */
 @media (max-width: 768px) {
     .sidebar {
         transform: translateX(-280px);
